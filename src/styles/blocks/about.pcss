@@ -1,0 +1,48 @@
+.about__container {
+    display: flex;
+    max-width: 1080px;
+    align-items: center;
+    padding: 60px 0 20px;
+}
+.about__user {
+    flex: 2;
+}
+.about__content {
+    flex: 3;
+}
+.about__desc {
+    font-weight: 600;
+    color: rgba($text-color, .8);
+    margin-bottom: 21px;
+}
+
+.about__title {
+    font-weight: 800;
+    font-size: 36px;
+    color: $text-color;
+    margin-bottom: 31px;
+}
+
+.about__text-info {
+    font-weight: 600;
+    color: rgba($text-color, .8);
+    margin-bottom: 77px;
+}
+
+.about__ps {
+    position: relative;
+    font-style: italic;
+    color: rgba($text-color, .8);
+    padding-left: 52px;
+    margin-left: -52px;
+
+    &:before {
+        content: '*';
+        position: absolute;
+        top: -16px;
+        left: 0;
+        font-size: 48px;
+        font-style: italic;
+        color: rgba(219, 2, 0, 0.5);
+    }
+}

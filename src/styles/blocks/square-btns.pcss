@@ -1,0 +1,26 @@
+.square-btns {
+    &__item {
+        width: 52px;
+        height: 52px;
+        background-color: #252830 !important;
+        transition: .2s ease all;
+
+        &:hover {
+            .arrow-down,
+            .arrow-up {
+                fill: #717883;
+            }
+        }
+    }
+}
+.arrow-down,
+.arrow-up {
+    width: 18px;
+    fill: $text-color;
+}
+.arrow-down {
+    transform: rotate(-90deg);
+}
+.arrow-up {
+    transform: rotate(90deg);
+}

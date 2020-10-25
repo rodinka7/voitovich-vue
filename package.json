@@ -1,5 +1,5 @@
 {
-  "name": "ls-advanced-boilerplate",
+  "name": "ls-advanced-vue",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "build-storybook": "build-storybook"
   },
   "keywords": [],
-  "author": "",
+  "author": "Tania Voitovich",
   "license": "ISC",
   "devDependencies": {
     "@babel/core": "^7.10.5",

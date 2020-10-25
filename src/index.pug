@@ -1,15 +1,126 @@
-include ./mixins.pug
+extends ./main.layout.pug
 
-<!DOCTYPE html>
-html(lang="en")
-  head
-    meta(charset="UTF-8")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0")
-    meta(http-equiv="X-UA-Compatible", content="ie=edge")
-    title Portfolio | main page
-  body
-    .wrapper
-      .maincontent
-        +image('content/user.jpg', 'user-pic')
-        +icon('link', 'link-class')
-        .icon-bg
+block content
+  .welcome-section
+    section.hero
+      .container.hero__container
+        header.header
+          a.logo(href="#") ТВ
+          nav.menu
+            - var menuItems = ["Обо мне", "Навыки", "Работы", "Отзывы"];
+            ul.menu__list
+              each item in menuItems
+                li.menu__item
+                  a.menu__link(href="#") #{item}
+            - var socials = ["insta", "vk", "github", "envelope"];
+          ul.socials
+            each item in socials
+              li.social__item
+                a.social__link(href="#")
+                  +icon(item, "social__icon")
+
+        .userinfo
+          .userinfo__title Личный сайт #[br] веб разработчика
+          .userinfo__name Татьяна Войтович
+
+        .hero__bottom-buttons
+          button.scroll-down-button Скролл
+    section.about
+      .container.about__container
+        .about__user
+          .user
+            .user__avatar
+              .user__avatar-style
+                +image("content/user.jpg", "user__avatar-pic")
+            -
+              var userInfo = [
+                ["Проживаю", "Киев"],
+                ["Возраст", "33 года"],
+                ["Родилась", "24 февраля 1987"],
+              ]
+            table.user__data
+              each item in userInfo
+                tr.user__data-row
+                  td.user__data-title #{item[0]}:
+                  td.user__data-content #{item[1]}
+        .about__content
+          .about__desc Привет, меня зовут
+          .about__title Татьяна Войтович
+          .about__text-info
+            p Я занимаюсь разработкой современных сайтов и приложений. Мне нравится делать интересные и современные проекты.
+          .about__ps
+            | Этот сайт я сделал в рамках обучения в Школе онлайн образования
+            | LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите,
+            | как тут всё классно и красиво!
+  .middle-section
+    .triangles.middle-section__triangles-top
+      svg.triangles__shape.triangles__shape--position--left(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,0 0,100 1000,100")
+      svg.triangles__shape.triangles__shape--position--right(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,100 1000,100 1000,0")
+    section.values
+      .container.values__container
+        .values__title Чем я могу быть полезен вам
+        .values__content
+          p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+        .values__widget-wrapper
+          +image("content/skills.png", "values__widget-pic")
+        .values__widget
+          -
+            var skillsCategories = [
+              ["Frontend", ["HTML5", "CSS3", "Javascript", "Jquery и Vue.js"]],
+              ["Workflow", ["Git", "Terminal", "Gulp", "Webpack"]],
+            ];
+          ul.skills
+            each category in skillsCategories
+              li.skills__item
+                .skills-row
+                  .skills-row__title #{category[0]}
+                  ul.skills-row__list
+                    each skill in category[1]
+                      li.skills-row__item
+                        .skill
+                          svg.skill__circle-shape(viewbox="0 0 100 100")
+                            circle.skill__circle.skill__circle--layer--under(cx="50" cy="50" r="40")
+                            circle.skill__circle.skill__circle--layer--above(cx="50" cy="50" r="40" stroke="url(#gradient)" transform="rotate(180 50 50)")
+                            linearGradient(id="gradient" x1="0%" y1="0%" x2="100%" y2="0%")
+                              stop(offset="0%" stop-color="#5500f2")
+                              stop(offset="100%" stop-color="#8f00ef")
+                          .skill__title #{skill}
+    section.works
+      .container.works__container
+        .section-title Мои работы
+        .works__content
+          .works-preview
+            .works-preview__pictures(data-slide="2")
+              +image("content/slider-1.png", "works-preview__img")
+              .works-preview__thumbs
+                ul.thumbs
+                  - for (var i = 4; i > 0; i--)
+                    li.thumb__item
+                      a.thumb__link(href="#")
+                        +image(`content/slider-${i}.png`, "thumb__pic")
+              .works-preview__btns
+                .square-btns
+                  button.square-btns__item.square-btns__item--next(type="button")
+                    +icon("arrow-down", "arrow-down")
+                  button.square-btns__item.square-btns__item--prev(type="button")
+                    +icon("arrow-down", "arrow-up")
+            .works-preview__info
+              - var tags = ["HTML", "CSS", "Javascript"];
+              ul.tags
+                each item in tags
+                  li.tags__item
+                    .tag #{item}
+              .works-preview__title Сайт школы образования
+              .works-preview__desc
+                p Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 2 месяца только самых тяжелых испытаний и бессонных ночей!
+              a.iconed-link(href="#") Посмотреть сайт
+                +icon("link", "iconed-link__svg")
+    .triangles.middle-section__triangles-bottom.triangles--pointed-down
+      svg.triangles__shape.triangles__shape--position--left(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,0 0,100 1000,100")
+      svg.triangles__shape.triangles__shape--position--right(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,100 1000,100 1000,0")
+  .block(style="height: 100vh; width: 100%; background: red;")
+
