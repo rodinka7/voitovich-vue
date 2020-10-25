@@ -1,0 +1,29 @@
+.user-display {
+    display: flex;
+    &__avatar {
+        flex: 1;
+        &-style {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+    }
+
+    &__data {
+        display: flex;
+        flex: 2;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    &__name {
+        font-size: 18px;
+        font-weight: 700;
+        color: $text-color;
+    }
+
+    &__occ {
+        color: rgba($text-color, .5);
+    }
+}
