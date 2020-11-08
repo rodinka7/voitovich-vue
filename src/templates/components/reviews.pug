@@ -1,0 +1,29 @@
+section#reviews.reviews
+    .container.reviews__container
+      .slider
+        .slider__header
+          .section-title Что обо мне говорят
+          .slider__buttons
+            button.round-btn.round-btn--pointer--right(type="button")
+              +icon("arrow-down", "pointer-right")
+            button.round-btn.round-btn--pointer--left(type="button")
+              +icon("arrow-down", "pointer-left")
+        ul.slider__content
+          -
+            var sliderItems = [
+              ["Этот парень проходил обучение веб-разработке не где-то, а в LoftSchool! 4,5 месяца только самых тяжелых испытаний и бессонных ночей!", "Ковальчук Дмитрий", "Основатель Loftschool", "content/user-1.jpg"],
+              ["Этот код выдержит любые испытания. Только пожалуйста, не загружайте сайт на слишком старых браузерах", "Владимир Сабанцев", "Преподаватель", "content/user-1.jpg"],
+            ];
+          each item in sliderItems
+            li.slider__item
+              .quote
+                .quote__text
+                  p #{item[0]}
+                .quote__user
+                  .user-display
+                    .user-display__avatar
+                      .user-display__avatar-style
+                        +image(item[3], "user-display__pic")
+                    .user-display__data
+                      .user-display__name #{item[1]}
+                      .user-display__occ #{item[2]}

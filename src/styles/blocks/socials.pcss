@@ -1,0 +1,21 @@
+.socials {
+    display: flex;
+}
+
+.social__item {
+    height: 25px;
+    width: 25px;
+    margin-right: 35px;
+
+    .social__icon {
+        fill: $text-color;
+    }
+
+    &:last-child {
+        margin-right: 0;
+    }
+
+    &:hover .social__icon{
+        fill: rgba($text-color, .7);
+    }
+}

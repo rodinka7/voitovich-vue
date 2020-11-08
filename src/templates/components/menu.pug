@@ -1,0 +1,11 @@
+-
+    var menuItems = [
+        ["Обо мне", "#about"],
+        ["Навыки", "#values"],
+        ["Работы", "#works"],
+        ["Отзывы", "#reviews"],
+    ];
+ul.menu__list
+    each item in menuItems
+        li.menu__item
+            a.menu__link(href=`${item[1]}`) #{item[0]}
