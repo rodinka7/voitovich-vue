@@ -1,0 +1,28 @@
+mixin icon(name, className)
+  - var icon = require(`images/icons/${name}.svg`).default;
+  svg(class=className viewBox=icon.viewBox preserveAspectRatio="none")
+    use(xlink:href=`sprite.svg#${icon.id.replace('-usage', '')}`)
+
+mixin image(path, className)
+  img(src=require(`images/${path}`).default class=className)
+
+mixin socials(modificator)
+  -
+    var socials = [
+        ["insta", "https://www.instagram.com/tania_voytovich/"],
+        ["vk", "https://vk.com/"],
+        ["github", "https://github.com/rodinka7"],
+        ["envelope", "mailto:taniajs777@gmail.com"],
+    ];
+  ul(class=`${modificator}`).socials
+    each item in socials
+        li.social__item
+            a.social__link(href=`${item[1]}` target="_blank")
+                +icon(item[0], "social__icon")
+
+mixin triangles(modificator)
+  .triangles(class=`${modificator}`)
+    svg.triangles__shape.triangles__shape--position--left(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,0 0,100 1000,100")
+    svg.triangles__shape.triangles__shape--position--right(viewBox="0 0 1000 100" preserveAspectRatio="none")
+        polygon(points="0,100 1000,100 1000,0")

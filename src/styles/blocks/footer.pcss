@@ -19,10 +19,19 @@
 
         &-name {
             font-size: 18px;
+            font-weight: bold;
             color: #ffffff;
             text-transform: uppercase;
             line-height: 30px;
             margin-bottom: 16px;
+
+            a {
+                text-decoration: none;
+            }
+
+            &:hover a {
+                color: rgba(255,255,255,.7);
+            }
         }
 
         &-info {
@@ -37,6 +46,10 @@
         margin-bottom: 40px;
         .menu__link {
             color: #ffffff;
+        }
+
+        .menu__item:hover .menu__link{
+            color: rgba(255, 255, 255, .7);
         }
     }
 
@@ -68,21 +81,36 @@
 
     &__socials {
         .social__item {
-            width: 50px;
-            height: 50px;
-            padding: 15px;
-            border: 1px solid #ffffff;
-            border-radius: 50%;
-            opacity: .3;
             margin-right: 21px;
+            height: auto;
+            width: auto;
+            opacity: .3;
 
             &:last-child {
                 margin-right: 0;
             }
+            .social__icon {
+                fill: #ffffff;
+                width: 21px;
+                height: 21px;
+            }
+
+            &:hover {
+                opacity: .5;
+                .social__icon {
+                    fill: #ffffff;
+                }
+            }
         }
 
-        .social__icon {
-            fill: #ffffff;
+        .social__link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #ffffff;
+            border-radius: 50%;
         }
     }
 }
