@@ -16,8 +16,12 @@
 
     }
 
-    &:hover {
-        opacity: .7;
+    &:not([disabled]):hover {
+        border: 2px solid $hover-color;
+
+        svg {
+            fill: $hover-color;
+        }
     }
 
 }

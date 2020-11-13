@@ -1,0 +1,10 @@
+script(type="text/x-template")#toggle-icon
+  #nav-icon(
+    ref="toggle-btn"
+    @click="isOpened = !isOpened"
+    :class="{open: isOpened}"
+  )
+    span
+    span
+    span
+    span

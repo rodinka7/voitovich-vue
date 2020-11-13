@@ -6,12 +6,20 @@
         display: flex;
         justify-content: space-between;
         height: auto;
+
+        @include tablets {
+            flex-direction: column;
+        }
     }
 
     &__copyright,
     &__title {
         margin-right: 20px;
         flex: 1;
+
+        @include tablets {
+            margin-bottom: 26px;
+        }
     }
 
     &__title {
@@ -30,12 +38,16 @@
             }
 
             &:hover a {
-                color: rgba(255,255,255,.7);
+                color: #FF9A00;
             }
         }
 
         &-info {
             line-height: 30px;
+        }
+
+        @include tablets {
+            padding: 0;
         }
     }
 
@@ -44,17 +56,33 @@
     }
     &__menu {
         margin-bottom: 40px;
+
+        .menu__list {
+            display: flex;
+            flex-wrap: wrap;
+        }
         .menu__link {
             color: #ffffff;
         }
 
         .menu__item:hover .menu__link{
-            color: rgba(255, 255, 255, .7);
+            color: #FF9A00;
+        }
+
+        @include phones {
+            .menu__item {
+                width: 50%;
+                margin: 0 0 22px;
+            }
         }
     }
 
     &__comments {
         display: flex;
+
+        @include phones {
+            flex-direction: column;
+        }
     }
 
     &__comment {
@@ -77,6 +105,11 @@
             color: #ffffff;
             font-style: italic;
         }
+
+        @include phones {
+            width: 100%;
+            margin: 0 0 30px;
+        }
     }
 
     &__socials {
@@ -91,14 +124,12 @@
             }
             .social__icon {
                 fill: #ffffff;
-                width: 21px;
-                height: 21px;
+                width: 50%;
             }
 
             &:hover {
-                opacity: .5;
                 .social__icon {
-                    fill: #ffffff;
+                    fill: #FF9A00;
                 }
             }
         }
@@ -111,6 +142,9 @@
             height: 50px;
             border: 1px solid #ffffff;
             border-radius: 50%;
+            &:hover {
+                border: 1px solid #FF9A00;
+            }
         }
     }
 }

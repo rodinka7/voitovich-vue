@@ -1,0 +1,66 @@
+script(type="text/x-template")#works-slider
+    .works-slider
+        display(
+            :currentWork="currentWork"
+            :currentIndex="currentIndex"
+            :works="works"
+            @slide="slide"
+        )
+        info(
+            :currentWork="currentWork"
+        )
+
+script(type="text/x-template")#slider-display
+    .works-slider__pictures(:data-slide="currentIndex + 1")
+        .works-slider__inner
+            .works-slider__pictures-wrap
+                img(:src="currentWork.photo").works-slider__img
+            .works-slider__thumbs
+                thumbs(
+                    :works="reversedWorks"
+                    :currentWork="currentWork"
+                )
+            .works-slider__btns
+                btns(
+                    @slide="$emit('slide', $event)"
+                )
+
+script(type="text/x-template")#slider-thumbs
+    ul.thumbs
+        li.thumb__item(
+            v-for="slide in works"
+            :key="slide.id"
+            :class="{active: slide.id === currentWork.id}"
+        )
+            button.thumb__link
+                img(:src="slide.photo").thumb__pic
+
+script(type="text/x-template")#slider-btns
+    .square-btns
+        button(
+            type="button"
+            @click="$emit('slide', 'next')"
+        ).square-btns__item.square-btns__item--next
+            +icon("arrow-down", "arrow-down")
+        button(
+            type="button"
+            @click="$emit('slide', 'prev')"
+        ).square-btns__item.square-btns__item--prev
+            +icon("arrow-down", "arrow-up")
+
+script(type="text/x-template")#slider-info
+    .works-slider__info
+        tags(
+            :tags="tagsArray"
+        )
+        .works-slider__title {{currentWork.title}}
+        .works-slider__desc
+            p {{currentWork.desc}}
+        .works-slider__link
+            a.iconed-link(:href="currentWork.link" target="_blank") Посмотреть сайт
+                +icon("link", "iconed-link__svg")
+
+script(type="text/x-template")#slider-tags
+    ul.tags
+        li.tags__item(v-for="tag in tags")
+            .tag {{tag}}

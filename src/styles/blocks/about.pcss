@@ -1,11 +1,27 @@
 .about__container {
     display: flex;
-    max-width: 1080px;
+    max-width: 1006px;
     align-items: center;
-    padding: 60px 0 230px;
+    padding: 60px 0 12.375rem;
+    margin: 0 auto;
+
+    @include phones {
+        flex-direction: column;
+    }
+    @include tablets {
+        
+    }
 }
 .about__user {
     flex: 2;
+
+    @include phones {
+        width: 100%;
+        margin-bottom: 45px;
+    }
+    @include tablets {
+        
+    }
 }
 .about__content {
     flex: 3;
@@ -21,6 +37,10 @@
     font-size: 36px;
     color: $text-color;
     margin-bottom: 31px;
+
+    @include tablets {
+        font-size: 30px;
+    }
 }
 
 .about__text-info {
@@ -44,5 +64,12 @@
         font-size: 48px;
         font-style: italic;
         color: rgba(219, 2, 0, 0.5);
+    }
+
+     @include phones {
+        margin-left: -1.25rem;
+    }
+    @include tablets {
+        
     }
 }

@@ -1,9 +1,12 @@
 section#values.values
   .container.values__container
-    .values__title Чем я могу быть полезен вам
-    .values__content
-      p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
-    .values__widget-wrapper
-      +image("content/skills.png", "values__widget-pic")
+    .values__inner
+      .values__content
+        .values__header
+          .values__title Чем я могу быть полезен вам
+          .values__subtitle
+            p Этот сайт я сделал в рамках обучения в Школе онлайн образования LoftSchool. Чуть позже я освежу в нём свой контент. А пока посмотрите, как тут всё классно и красиво!
+      .values__img
+        +image("content/skills.png")
 
-    include ./skills.pug
+    #skills-component

@@ -3,10 +3,24 @@
     flex-wrap: wrap;
     justify-content: space-around;
     padding: 60px 0 74px;
+
+    @include tablets {
+        width: 100%;
+    }
 }
 
 .works__title {
     margin-bottom: 83px;
+
+    @include phones {
+        font-size: 24px;
+        margin-bottom: 24px;
+    }
+    @include tablets {
+        font-size: 30px;
+        margin-bottom: 48px;
+        text-align: center;
+    }
 }
 
 .works__content {

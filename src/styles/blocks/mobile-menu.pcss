@@ -1,0 +1,42 @@
+.mobile-menu {
+    display: none;
+    padding: 20%;
+    z-index: 1;
+
+    .mobile-menu__nav {
+        margin-bottom: 118px;
+    }
+
+    &.open {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #ffffff;
+
+        .menu__list {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .menu__item {
+            margin-bottom: 24px;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+        .menu__link {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .mobile-menu__socials {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

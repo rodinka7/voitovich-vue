@@ -1,14 +1,25 @@
 .slider {
-    width: 70%;
+    max-width: 1006px;
 
     &__header {
         margin-bottom: 95px;
         display: flex;
+
+        @include tablets {
+            flex-direction: column;
+            align-items: center;
+        }
     }
 
     .section-title {
         width: auto;
         margin-right: 116px;
+
+        @include tablets {
+            font-size: 24px;
+            margin-right: 0;
+            margin-bottom: 20px;
+        }
     }
 
     &__content {
@@ -18,27 +29,19 @@
     }
 
     &__item {
-        position: relative;
-        width: 47%;
-        padding-left: 10%;
-        margin-right: 20px;
-
-        &:last-child {
-            margin-right: 0;
-        }
-
-        &:before {
-            position: absolute;
-            content: '';
-            top: 0;
-            left: 0;
-            width: 77px;
-            height: 58px;
-            background: svg-load('quote.svg', fill=#DDE3EC, width=100%, height=100%) right no-repeat;
-        }
+        padding: 0 20px;
     }
 
     &__buttons {
         display: flex;
+
+        button[disabled] {
+            cursor: not-allowed;
+            opacity: .5;
+        }
+    }
+
+    @include tablets {
+        max-width: 100%;
     }
 }

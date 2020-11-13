@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 20px 0;
 
     &__title {
         font-size: 18px;
@@ -9,6 +10,13 @@
         margin-bottom: 24px;
         color: rgba(70, 78, 98, 0.5);
         text-align: center;
+
+        @include phones {
+            font-size: 14px;
+        }
+        @include tablets {
+            font-size: 16px;
+        }
     }
 
     &__name {
@@ -17,5 +25,14 @@
         line-height: 1;
         color: $text-color;
         max-width: 400px;
+
+        @include phones {
+            font-size: 36px;
+            max-width: 16rem;
+        }
+        @include tablets {
+            font-size: 48px;
+            max-width: 16rem;
+        }
     }
 }

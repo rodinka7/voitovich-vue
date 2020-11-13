@@ -4,11 +4,24 @@
 }
 
 .scroll-down-button {
-    display: inline-block;
+    display: flex;
     text-decoration: none;
     font-size: 18px;
     font-weight: 600;
     color: $text-color;
-    padding-right: 3rem;
-    background: svg-load('scroll.svg', fill=$text-color, width=100%, height=100%) right no-repeat;
+
+    &__svg {
+        width: 14px;
+        height: 14px;
+        margin-left: 1rem;
+        svg {
+            fill: $text-color;
+        }
+    }
+
+    &:hover {
+        .scroll-down-button__svg svg {
+            fill: $hover-color;
+        }
+    }
 }

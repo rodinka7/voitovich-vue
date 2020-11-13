@@ -5,10 +5,16 @@ section.hero
       nav.menu
         include ./menu.pug
       +socials('')
+      #toggle-btn
+
+      include ./mobile-menu.pug
 
     .userinfo
       .userinfo__title Личный сайт #[br] веб разработчика
       .userinfo__name Татьяна Войтович
 
     .hero__bottom-buttons
-      a.scroll-down-button(href="#about") Скролл
+      a.scroll-down-button(href="#about")
+        span Скролл
+        .scroll-down-button__svg
+          +icon('scroll')
