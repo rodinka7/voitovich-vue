@@ -1,23 +1,30 @@
 import Vue from 'vue';
 
-new Vue({
-    el: '#toggle-btn',
+const toggleBtn = {
+    props: ['isOpened'],
     template: '#toggle-icon',
+};
+
+const mobileMenu = {
+    props: ['isOpened'],
+    template: '#mobile-menu',
+}
+
+new Vue({
+    el: '#menu',
+    template: '#menu-wrapper',
+    components: {
+        toggleBtn,
+        mobileMenu,
+    },
     data() {
         return {
             isOpened: false,
         }
     },
-    watch: {
-        isOpened(value) {
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const className = 'open';
-
-            if (value) {
-                mobileMenu.classList.add(className);
-            } else {
-                mobileMenu.classList.remove(className);
-            }
-        }
-    }
+    methods: {
+        toggle() {
+            this.isOpened = !this.isOpened;
+        },
+    },
 });

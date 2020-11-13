@@ -1,4 +1,31 @@
-.mobile-menu
-    .mobile-menu__nav
-        include ./menu.pug
-    +socials('mobile-menu__socials')
+script(type="text/x-template")#menu-wrapper
+    .mobile-menu__wrapper
+        toggle-btn(
+            :isOpened="isOpened"
+            @toggle="toggle"
+        )
+        mobile-menu(
+            :isOpened="isOpened"
+            @toggle="toggle"
+        )
+
+script(type="text/x-template")#mobile-menu
+    .mobile-menu(
+        ref="mobile-menu"
+        :class="{open: isOpened}"
+        @click="$emit('toggle')"
+    )
+        .mobile-menu__nav
+            include ./menu.pug
+        +socials('mobile-menu__socials')
+
+script(type="text/x-template")#toggle-icon
+  #nav-icon(
+    ref="toggle-btn"
+    @click="$emit('toggle')"
+    :class="{open: isOpened}"
+  )
+    span
+    span
+    span
+    span
