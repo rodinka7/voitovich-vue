@@ -12,11 +12,13 @@
           placeholder="Название новой группы"
           :value="value"
           :errorText="errorText"
-          @input="$emit('input', $event)"
+          @input="changeValue($event)"
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
         ></app-input>
+
+        <alert :isShown="showAlert"/>
       </div>
       <div class="buttons">
         <div class="button-icon">
@@ -41,26 +43,39 @@ export default {
       type: String,
       default: ""
     },
-    blocked: Boolean
+    blocked: Boolean,
+    editModeByDefault: Boolean,
   },
   data() {
     return {
-      editmode: false,
-      title: this.value
+      editmode: this.editModeByDefault,
+      title: this.value,
+      showAlert: false,
     };
   },
   methods: {
+    changeValue(data) {
+      this.showAlert = false;
+      this.$emit('input', data);
+    },
     onApprove() {
+      if (!this.value.trim()) {
+        this.showAlert = true;
+        return;
+      }
+
       if (this.title.trim() === this.value.trim()) {
         this.editmode = false;
       } else {
         this.$emit("approve", this.value);
+        this.editmode = false;
       }
     }
   },
   components: {
     icon: () => import("components/icon"),
-    appInput: () => import("components/input")
+    appInput: () => import("components/input"),
+    alert: () => import("components/alert"),
   }
 };
 </script>
