@@ -1,10 +1,10 @@
 <template>
-    <div class="skill-component" v-if="!editMode">
+    <div class="skill-component" v-if="!currentSkill.editMode">
         <div class="title">{{skill.title}}</div>
         <div class="percent">{{skill.percent}}</div>
         <div class="buttons">
-            <icon symbol="pencil" class="btn" @click="editMode = true" grayscale />
-            <icon symbol="trash" class="btn" @click="$emit('remove', skill.id)" grayscale />
+            <icon symbol="pencil" class="btn" @click="currentSkill.editMode = true" grayscale />
+            <icon symbol="trash" class="btn" @click="$emit('remove', currentSkill)" grayscale />
         </div>
     </div>
     <div class="skill-component" v-else>
@@ -12,9 +12,8 @@
             <app-input
                 noSidePaddings
                 v-model="currentSkill.title"
-                @input="changeValue"
+                :errorMessage="validation.firstError('currentSkill.title')"
             />
-            <alert :isShown="showTitleAlert" />
         </div>
         <div class="percent">
             <app-input
@@ -23,13 +22,12 @@
                 min="0"
                 max="100"
                 maxlength="3"
-                @input="changeValue"
+                :errorMessage="validation.firstError('currentSkill.percent')"
             />
-            <alert :isShown="showPercentAlert" />
         </div>
         <div class="buttons">
             <icon symbol="tick" class="btn" @click="editSkill" />
-            <icon symbol="cross" @click="editMode = false" class="btn" />
+            <icon symbol="cross" @click="currentSkill.editMode = false" class="btn" />
         </div>
     </div>
 </template>
@@ -37,26 +35,37 @@
 <script>
 import input from '../input';
 import icon from '../icon';
-import alert from '../alert';
+import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
 
 export default {
+    mixins: [ValidatorMixin],
+    validators: {
+        'currentSkill.title': value => {
+            return Validator.value(value).required('Не может быть пустым');
+        },
+        'currentSkill.percent': value => {
+            return Validator.value(value)
+                .integer('Должно быть числом')
+                .between(0, 100, 'Некорректное значение')
+                .required('Не может быть пустым');
+        },
+    },
     props: {
         skill: {
             type: Object,
             required: true,
-            default: () => {},
+            default: () => ({}),
         }
     },
     data() {
         return {
-            editMode: false,
             currentSkill: {
                 id: this.skill.id,
                 title: this.skill.title,
                 percent: this.skill.percent,
+                category: this.skill.category,
+                editMode: false,
             },
-            showTitleAlert: false,
-            showPercentAlert: false,
         }
     },
     components: {
@@ -65,24 +74,10 @@ export default {
         alert,
     },
     methods: {
-        editSkill() {
-            if (!this.currentSkill.title.trim()) {
-                this.showTitleAlert = true;
-                return;
-            }
-
-            if (!this.currentSkill.percent.trim()) {
-                this.showPercentAlert = true;
-                return;
-            }
-
+        async editSkill() {
+            if (!(await this.$validate())) return;
             this.$emit('approve', this.currentSkill);
-            this.editMode = false;
         },
-        changeValue() {
-            this.showTitleAlert = false;
-            this.showPercentAlert = false;
-        }
     }
 }
 </script>

@@ -6,9 +6,8 @@
       <app-input
         placeholder="Новый навык"
         v-model="newSkill.title"
-        @input="changeValue"
+        :errorMessage="validation.firstError('newSkill.title')"
       />
-      <alert :isShown="showInputAlert" />
     </div>
     <div class="percent">
       <app-input
@@ -17,9 +16,8 @@
         max="100"
         maxlength="3"
         v-model="newSkill.percent"
-        @input="changeValue"
+        :errorMessage="validation.firstError('newSkill.percent')"
       />
-      <alert :isShown="showPercentAlert" />
     </div>
     <div class="button">
       <round-button
@@ -33,9 +31,21 @@
 <script>
 import input from "../input";
 import button from "../button";
-import alert from '../alert';
+import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
 
 export default {
+  mixins: [ ValidatorMixin ],
+  validators: {
+    'newSkill.title': value => {
+      return Validator.value(value).required('Не может быть пустым');
+    },
+    'newSkill.percent': value => {
+      return Validator.value(value)
+        .integer('Должно быть числом')
+        .between(0, 100, 'Некорректное значение')
+        .required('Не может быть пустым');
+    },
+  },
   props: {
     blocked: Boolean,
   },
@@ -47,37 +57,16 @@ export default {
   data() {
     return {
       newSkill: {
-        id: 0,
         title: '',
         percent: '',
       },
-      showPercentAlert: false,
-      showInputAlert: false,
     }
   },
   methods: {
-    addSkill() {
-      if (!this.newSkill.title.trim()) {
-        this.showInputAlert = true;
-        return;
-      }
-
-      if (!this.newSkill.percent.trim()) {
-        this.showPercentAlert = true;
-        return;
-      }
+    async addSkill() {
+      if (!(await this.$validate())) return;
 
       this.$emit('add-skill', this.newSkill);
-
-      this.newSkill = {
-        id: 0,
-        title: '',
-        percent: '',
-      }
-    },
-    changeValue() {
-      this.showInputAlert = false;
-      this.showPercentAlert = false;
     }
   }
 };

@@ -16,9 +16,8 @@
           @keydown.native.enter="onApprove"
           autofocus="autofocus"
           no-side-paddings="no-side-paddings"
+          :errorMessage="validation.firstError('value')"
         ></app-input>
-
-        <alert :isShown="showAlert"/>
       </div>
       <div class="buttons">
         <div class="button-icon">
@@ -33,7 +32,15 @@
 </template>
 
 <script>
+import { Validator, mixin as ValidatorMixin } from 'simple-vue-validator';
+
 export default {
+  mixins: [ValidatorMixin],
+  validators: {
+    'value': value => {
+      return Validator.value(value).required('Не может быть пустым');
+    },
+  },
   props: {
     value: {
       type: String,
@@ -50,32 +57,25 @@ export default {
     return {
       editmode: this.editModeByDefault,
       title: this.value,
-      showAlert: false,
     };
   },
   methods: {
     changeValue(data) {
-      this.showAlert = false;
       this.$emit('input', data);
     },
-    onApprove() {
-      if (!this.value.trim()) {
-        this.showAlert = true;
-        return;
+    async onApprove() {
+      if (!(await this.$validate())) return;
+
+      if (this.title.trim() !== this.value.trim()) {
+        this.$emit("approve", this.value);
       }
 
-      if (this.title.trim() === this.value.trim()) {
-        this.editmode = false;
-      } else {
-        this.$emit("approve", this.value);
-        this.editmode = false;
-      }
+      this.editmode = false;
     }
   },
   components: {
     icon: () => import("components/icon"),
     appInput: () => import("components/input"),
-    alert: () => import("components/alert"),
   }
 };
 </script>
