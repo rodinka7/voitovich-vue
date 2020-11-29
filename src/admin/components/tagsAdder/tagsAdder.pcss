@@ -1,7 +1,16 @@
  .tags {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 20px;
+    margin-left: -10px;
+    li:last-child {
+      margin-bottom: .5rem;
+    }
+    li > div {
+      background-color: #F3F6F9;
+    }
   }
   .tag {
     margin-right: 10px;
+    color: $text-color;
   }

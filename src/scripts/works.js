@@ -1,4 +1,8 @@
 import Vue from 'vue';
+import config from '../../env.paths.json';
+import axios from 'axios';
+
+axios.defaults.baseURL = config.BASE_URL;
 
 const thumbs = {
     props: ['works', 'currentWork'],
@@ -12,11 +16,6 @@ const tags = {
 
 const btns = {
     template: '#slider-btns',
-    // methods: {
-    //     slide(direction) {
-    //         this.$emit('slide', direction);
-    //     }
-    // }
 };
 
 const display = {
@@ -42,7 +41,7 @@ const info = {
     },
     computed: {
         tagsArray() {
-            return this.currentWork.skills.split(', ');
+            return this.currentWork.skills && this.currentWork.skills.split(', ');
         }
     }
 };
@@ -63,7 +62,7 @@ new Vue({
     computed: {
         currentWork() {
             // return this.works[this.currentIndex];
-            return this.works[0];
+            return this.works[0] || {};
         }
     },
     watch: {
@@ -80,7 +79,9 @@ new Vue({
         },
         requireImagesToArr(data) {
             return data.map(item => {
-                item.photo = require(`../images/content/${item.photo}`).default;
+                item.photo = `${config.BASE_URL}/${item.photo}`;
+                item.skills = item.techs;
+                delete item.techs;
                 return item;
             });
         },
@@ -100,8 +101,9 @@ new Vue({
             }
         }
     },
-    created() {
-        const data = require('../data/works.json');
+    async created() {
+        const uid = 424;
+        const { data } = await axios.get(`/works/${uid}`);
         this.works = this.requireImagesToArr(data);
         this.currentWork = this.works[this.currentIndex];
     }

@@ -91,4 +91,4 @@ export default {
 }
 </script>
 
-<style lang="postcss" src="./login.pcss"></style>
+<style lang="postcss" scoped src="./login.pcss"></style>
