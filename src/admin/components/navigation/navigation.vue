@@ -7,7 +7,9 @@
                     v-for="link in links"
                     :key="link.id"
                 >
-                    <a :href="`/${link.alias}`" class="link">{{link.title}}</a>
+                    <router-link active-class="active" exact :to="link.alias" class="link">
+                        {{link.title}}
+                    </router-link>
                 </li>
             </ul>
         </nav>
@@ -16,16 +18,16 @@
 
 <script>
 const links = [
-    {id: 0, title: "Обо мне", alias: "admin/about", active: false},
-    {id: 1, title: "Работы", alias: "admin/works", active: true},
-    {id: 2, title: "Отзывы", alias: "admin/reviews", active: false},
+    {id: 0, title: "Обо мне", alias: "/"},
+    {id: 1, title: "Работы", alias: "/works"},
+    {id: 2, title: "Отзывы", alias: "/reviews"},
 ];
 export default {
     data() {
         return {
             links,
         }
-    }
+    },
 }
 </script>
 

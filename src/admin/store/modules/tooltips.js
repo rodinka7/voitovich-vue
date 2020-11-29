@@ -4,6 +4,7 @@ export default {
         isShown: false,
         text: '',
         type: 'success',
+        timeOut: null,
     },
     mutations: {
         'SET_TOOLTIP': (state, tooltip) => {
@@ -13,24 +14,25 @@ export default {
         }
     },
     actions: {
-        show: ({ commit, dispatch }, tooltip) => {
-            let timeOut = null;
-
+        show: ({ commit, dispatch, state }, tooltip) => {
             commit('SET_TOOLTIP', {
                 isShown: true,
                 text: tooltip.text,
                 type: tooltip.type,
             });
 
-            if (timeOut) {
-                clearInterval(timeOut);
+            if (state.timeOut) {
+                clearTimeout(state.timeOut);
             }
 
-            timeOut = setInterval(() => {
+            state.timeOut = setTimeout(() => {
+                clearTimeout(state.timeOut);
                 dispatch('hide');
             }, 3000);
         },
         hide: ({ commit, state  }) => {
+            clearTimeout(state.timeOut);
+
             commit('SET_TOOLTIP', {
                 ...state,
                 isShown: false,

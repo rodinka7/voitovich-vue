@@ -81,19 +81,12 @@
       }),
       async addCategory(data) {
         if (!data) return;
+
         try {
           await this.createCategoryAction(data);
           this.emptyCatisShown = false;
-
-          this.showTooltip({
-            text: 'Категория успешно добавлена',
-            type: 'success',
-          });
         } catch (e) {
-          this.showTooltip({
-            text: e.message,
-            type: 'error',
-          });
+          console.log(e.message);
         }
       },
       async editCategory(data, cid) {
@@ -102,31 +95,15 @@
             title: data,
             cid,
           });
-
-          this.showTooltip({
-            text: 'Категория успешно обновлена',
-            type: 'success',
-          });
         } catch (error) {
-          this.showTooltip({
-            text: error.message,
-            type: 'error',
-          });
+          console.log(error.message);
         }
       },
       async removeCategory(cid) {
         try {
           await this.removeCategoryAction(cid);
-
-          this.showTooltip({
-            text: 'Категория успешно удалена',
-            type: 'success',
-          });
         } catch (error) {
-          this.showTooltip({
-            text: error.message,
-            type: 'error',
-          });
+          console.log(error.message);
         }
       },
       async addSkill(data, cid) {
@@ -138,46 +115,23 @@
 
           data.title = '';
           data.percent = '';
-
-          this.showTooltip({
-            text: 'Навык успешно добавлен',
-            type: 'success',
-          });
         } catch (e) {
-          this.showTooltip({
-            text: e.message,
-            type: 'error',
-          });
+          console.log(e.message);
         }
       },
       async editSkill(data) {
         try {
           await this.editSkillAction(data);
           data.editMode = false;
-
-          this.showTooltip({
-            text: 'Навык успешно обновлен',
-            type: 'success',
-          });
         } catch (error) {
-          this.showTooltip({
-            text: error.message,
-            type: 'error',
-          })
+          console.log(error.message);
         }
       },
       async removeSkill(data) {
         try {
           await this.removeSkillAction(data);
-          this.showTooltip({
-            text: 'Навык успешно удален',
-            type: 'success',
-          });
         } catch (error) {
-          this.showTooltip({
-            text: error.message,
-            type: 'error',
-          })
+          console.log(error.message);
         }
       }
     },

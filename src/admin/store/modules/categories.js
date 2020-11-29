@@ -1,3 +1,5 @@
+import tooltipHelper from '../../helpers/tooltipHelper';
+
 export default {
     namespaced: true,
     state: {
@@ -51,35 +53,46 @@ export default {
         async create(store, title) {
             try {
                 const resp = await this.$axios.post('/categories', {title});
+                resp.data.skills = [];
+
                 store.commit('ADD_CATEGORY', resp.data);
+                tooltipHelper(store, 'Категория успешно добавлена', true);
             } catch (err) {
-                throw new Error('При добавлении категории произошла ошибка');
+                tooltipHelper(store, 'При добавлении категории произошла ошибка');
+
+                throw new Error(err.message);
             }
         },
-        async fetch({ commit }) {
-            const uid = 424;
+        async fetch(store) {
+            const uid = store.rootState.user.user.id;
 
             try {
                 const resp = await this.$axios.get(`/categories/${uid}`);
-                commit('SET_CATEGORIES', resp.data);
+                store.commit('SET_CATEGORIES', resp.data);
             } catch (err) {
                 console.log(err);
             }
         },
-        async edit({ commit }, { title, cid }) {
+        async edit(store, { title, cid }) {
             try {
                 const { data } = await this.$axios.post(`/categories/${cid}`, {title});
-                commit('EDIT_CATEGORY', data.category);
+                store.commit('EDIT_CATEGORY', data.category);
+
+                tooltipHelper(store, 'Категория успешно обновлена', true);
             } catch (err) {
-                throw new Error('При редактировании категории произошла ошибка');
+                tooltipHelper(store, 'При редактировании категории произошла ошибка');
+                throw new Error(err.message);
             }
         },
         async remove(store, cid) {
             try {
                 const { data } = await this.$axios.delete(`/categories/${cid}`);
                 store.commit('REMOVE_CATEGORY', cid);
+
+                tooltipHelper(store, 'Категория успешно удалена', true);
             } catch (err) {
-                throw new Error('При удалении категории произошла ошибка');
+                tooltipHelper(store, 'При удалении категории произошла ошибка');
+                throw new Error(err.message);
             }
         },
     }

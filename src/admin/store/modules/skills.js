@@ -1,28 +1,37 @@
+import tooltipHelper from '../../helpers/tooltipHelper';
+
 export default {
     namespaced: true,
     actions: {
-        async add({ commit }, skill) {
+        async add(store, skill) {
             try {
                 const resp = await this.$axios.post('/skills', skill);
-                commit('categories/ADD_SKILL', resp.data, { root: true });
+                store.commit('categories/ADD_SKILL', resp.data, { root: true });
+
+                tooltipHelper(store, 'Навык успешно добавлен', true);
             } catch (error) {
-                throw new Error('При сохранении возникла ошибка');
+                tooltipHelper(store, 'При сохранении возникла ошибка');
+                throw new Error(error.message);
             }
         },
-        async remove({ commit }, skill) {
+        async remove(store, skill) {
             try {
                 const resp = await this.$axios.delete(`/skills/${skill.id}`);
-                commit('categories/REMOVE_SKILL', skill, { root: true });
+                store.commit('categories/REMOVE_SKILL', skill, { root: true });
+                tooltipHelper(store, 'Навык успешно удален', true);
             } catch (error) {
-                throw new Error('При удалении записи возникла ошибка');
+                tooltipHelper(store, 'При удалении записи возникла ошибка');
+                throw new Error(error.message);
             }
         },
-        async edit({ commit }, skill) {
+        async edit(store, skill) {
             try {
                 const { data } = await this.$axios.post(`/skills/${skill.id}`, skill);
-                commit('categories/EDIT_SKILL', data.skill, { root: true });
+                store.commit('categories/EDIT_SKILL', data.skill, { root: true });
+                tooltipHelper(store, 'Навык успешно обновлен', true);
             } catch (error) {
-                throw new Error('При редактировании записи возникла ошибка');
+                tooltipHelper(store, 'При редактировании записи возникла ошибка');
+                throw new Error(error.message);
             }
         },
     }
