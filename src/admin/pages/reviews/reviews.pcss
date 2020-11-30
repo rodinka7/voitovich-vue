@@ -1,0 +1,123 @@
+.page-content {
+  position: relative;
+  padding: 20px 0;
+  flex: 1;
+
+  &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      background: url("../../../images/bg/hero.jpg") center center / cover no-repeat;
+      opacity: .1;
+      z-index: -1;
+  }
+}
+
+.header {
+  display: flex;
+  margin-bottom: 60px;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+}
+
+.title {
+  font-size: 21px;
+  font-weight: bold;
+  color: $text-color;
+  flex: initial;
+  padding: 0 54px 0 0;
+
+  @media (max-width: 767px) {
+    margin-bottom: 26px;
+  }
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -20px;
+}
+
+.item {
+  width: calc(100% / 3 - 20px);
+  margin-left: 20px;
+
+  @media (max-width: 1200px) {
+    width: calc(100% / 2 - 20px);
+  }
+
+  @media (max-width: 767px) {
+    width: calc(100% - 20px);
+  }
+}
+
+.form {
+  margin-bottom: 30px;
+}
+
+.empty-card {
+  background: linear-gradient(149.16deg, #0D5EE5 13.11%, #343DD0 84.24%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  padding: 20px;
+
+  @media (max-width: 767px) {
+    flex-direction: row;
+    width: 100%;
+  }
+}
+
+.circle {
+  position: relative;
+  border-radius: 50%;
+  width: 10rem;
+  height: 10rem;
+  border: 2px solid #ffffff;
+  margin-bottom: 22px;
+
+  @media (max-width: 767px) {
+    width: 70px;
+    height: 70px;
+    margin-right: 1rem;
+    margin-bottom: 0;
+  }
+}
+.circle::after {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  height: 2px;
+  width: 2rem;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+.circle::before {
+  content: '';
+  position: absolute;
+  display: block;
+  background-color: #fff;
+  width: 2px;
+  height: 2rem;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
+}
+.card-title {
+  color: #fff;
+}
+.editing {
+  opacity: .6;
+}

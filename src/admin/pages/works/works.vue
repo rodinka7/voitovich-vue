@@ -43,7 +43,14 @@ import config from '../../../../env.paths.json';
 export default {
     data() {
       return {
-        currWork: {},
+        currWork: {
+          title: "",
+          link: "",
+          description: "",
+          techs: "",
+          photo: {},
+          preview: "",
+        },
       }
     },
     components: {
@@ -67,7 +74,14 @@ export default {
         this.setMode(true);
       },
       addWork() {
-        this.currWork = {};
+        this.currWork = {
+          title: "",
+          link: "",
+          description: "",
+          techs: "",
+          photo: {},
+          preview: "",
+        };
         this.setMode(true);
       },
     },
