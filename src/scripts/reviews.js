@@ -1,6 +1,10 @@
 import Vuew from 'vue';
 import { Swiper, SwiperSlide } from 'vue-awesome-swiper';
 import 'swiper/swiper-bundle.css';
+import config from '../../env.paths.json';
+import axios from 'axios';
+
+axios.defaults.baseURL = config.BASE_URL;
 
 new Vuew({
     el: '#reviews-slider-component',
@@ -27,7 +31,8 @@ new Vuew({
     methods: {
         requireImgsToArr(data) {
             return data.map(item => {
-                item.photo = require(`../images/content/${item.pic}`).default;
+                // item.photo = require(`../images/content/${item.pic}`).default;
+                item.photo = `${config.BASE_URL}/${item.photo}`;
                 return item;
             })
         },
@@ -46,8 +51,10 @@ new Vuew({
             }
         }
     },
-    created() {
-        const data = require('../data/reviews.json');
+    async created() {
+        const uid = 424;
+        const { data } = await axios.get(`/reviews/${uid}`);
+        console.log(data);
         this.reviews = this.requireImgsToArr(data);
     }
 });

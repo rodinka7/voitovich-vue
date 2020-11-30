@@ -45,7 +45,8 @@ new Vue({
         }
     },
     async created() {
-        const { data } = await axios.get('/categories/424');
+        const uid = 424;
+        const { data } = await axios.get(`/categories/${uid}`);
         this.skills = data;
     },
     mounted() {

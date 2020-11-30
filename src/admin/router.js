@@ -1,8 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import header from './components/header';
-
 import store from './store';
 import axios from 'axios';
 

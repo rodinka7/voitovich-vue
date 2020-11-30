@@ -77,7 +77,6 @@
         addSkillAction: 'skills/add',
         editSkillAction: 'skills/edit',
         removeSkillAction: 'skills/remove',
-        showTooltip: 'tooltips/show',
       }),
       async addCategory(data) {
         if (!data) return;
